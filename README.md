@@ -2,7 +2,7 @@
 
 A Streamlit-based web application for analyzing weightlifting movements by tracking and visualizing barbell trajectories using YOLO object detection models.
 
-![App Demo](demo.gif) <!-- Replace with your actual demo video -->
+![App Demo](https://github.com/andymarlonrubioerazo/Barbell_tracker-/blob/main/video_final.mp4) <!-- Replace with your actual demo video -->
 
 ## Features
 
