@@ -1,0 +1,7 @@
+Streamlit
+PyTorch
+OpenCV
+Pandas
+NumPy
+Ultralytics
+Scipy
