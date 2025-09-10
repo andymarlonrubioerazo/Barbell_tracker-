@@ -242,9 +242,9 @@ class WeightliftingApp:
     
     def process_videos(self, uploaded_videos: List, modelo_selected: str, delay: float, model_classes: Dict):
         """Process uploaded videos with YOLO model"""
-        if not torch.cuda.is_available():
-            st.warning('No GPU is available, the video processing will be very slow')
-            return
+      #  if not torch.cuda.is_available():
+       #     st.warning('No GPU is available, the video processing will be very slow')
+        #    return
         
         st.write(f"Using device: {self.video_processor.device}")
         
