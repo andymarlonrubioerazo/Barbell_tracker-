@@ -151,7 +151,7 @@ class VideoProcessor:
             show=False,
             device=self.device,
             verbose=False,
-            stream=False,
+            stream=True,
             iou=0.25,
             max_det=2,
             half=True,
@@ -170,7 +170,7 @@ class VideoProcessor:
                 df = pd.concat([df, dfi], ignore_index=True)
         
         df['class'] = df['class'].replace(model_classes)
-        n_max = len(results)
+        n_max = i+1
         
         df_spline = None
         for i, clase in enumerate(df['class'].unique()):
