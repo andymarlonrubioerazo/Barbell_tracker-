@@ -51,7 +51,7 @@ A Streamlit-based web application for analyzing weightlifting movements by track
 
 ## Requirements
 
-- Python 3.7+
+- Python 3.12
 - Streamlit
 - PyTorch
 - OpenCV
