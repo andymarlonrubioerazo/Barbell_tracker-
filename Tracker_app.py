@@ -245,7 +245,7 @@ class WeightliftingApp:
       #  if not torch.cuda.is_available():
        #     st.warning('No GPU is available, the video processing will be very slow')
         #    return
-        
+        st.write(os.cpu_count())
         st.write(f"Using device: {self.video_processor.device}")
         
         
