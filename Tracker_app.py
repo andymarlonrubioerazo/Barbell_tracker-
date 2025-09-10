@@ -188,7 +188,7 @@ class WeightliftingApp:
     """Main application class for weightlifting analysis"""
     
     def __init__(self):
-        self.img_path = "pages/Gemini_Generated_Image_o0i5a5o0i5a5o0i5.png"
+        self.img_path = "Gemini_Generated_Image_o0i5a5o0i5a5o0i5.png"
         self.number_maximum_videos = 3
         self.video_processor = VideoProcessor()
         path_modelos = os.path.join('modelos')
