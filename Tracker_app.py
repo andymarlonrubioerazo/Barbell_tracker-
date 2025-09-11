@@ -172,7 +172,7 @@ class VideoProcessor:
         df['class'] = df['class'].replace(model_classes)
         n_max = i+1
         
-        df_spline = None
+        df_spline = pd.DataFrame([])
         for i, clase in enumerate(df['class'].unique()):
             dfi = self.trajectory_interpolate_every_class(df, clase=clase, n_max=n_max)
             
