@@ -4,7 +4,8 @@ A Streamlit-based web application for analyzing weightlifting movements by track
 
  <!-- Replace with your actual demo video -->
  [![Tracker App]()](https://weightlifting-trajectory-analysis-app.streamlit.app/)
-[![Wathch Video]()](https://github.com/andymarlonrubioerazo/Barbell_tracker-/blob/main/video_final.mp4)
+ 
+[![Wathch Video](https://github.com/andymarlonrubioerazo/Barbell_tracker-/blob/main/tracking_image.png)](https://github.com/andymarlonrubioerazo/Barbell_tracker-/blob/main/video_final.mp4)
 
 
 
