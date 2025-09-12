@@ -143,16 +143,16 @@ class VideoProcessor:
         try:
             results = model(
                 source=path_video,
-    #             show=False,
-    #             device=self.device,
-    #             verbose=False,
-    #             stream=False,
-    #             iou=0.25,
-    #             max_det=2,
-    #             half=True,
-    #             conf=0.4,
-    # ####onnxx
-    #             nms=True,
+                show=False,
+                device=self.device,
+                verbose=False,
+                stream=False,
+                iou=0.25,
+                max_det=2,
+                half=True,
+                conf=0.4,
+    ####onnxx
+                nms=True,
 
             )
         except Exception as e:
