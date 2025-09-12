@@ -460,7 +460,7 @@ class WeightliftingApp:
                     container1.video(video, width=400, autoplay=True, loop=True, muted=True)
         
        
-        if st.button('Process video with YOLO'):
+        if st.button('Start: Process video'):
             if not uploaded_videos:
                 st.warning("Please upload at least one video first")
                 return
