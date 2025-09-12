@@ -156,11 +156,9 @@ class VideoProcessor:
 
             )
         except Exception as e:
-            st.error(f"Error al ejecutar el modelo: {str(e)}")
+            st.error(f"Error al ejecutar el modelo en yolo_detections_videos: {str(e)}")
             st.write(f"Tipo de error: {type(e).__name__}")
 
-            st.write('error dentro de resultados')
-        st.write('resultados con predict')
         
         df = pd.DataFrame([])
         
@@ -292,16 +290,13 @@ class WeightliftingApp:
                     )
 
             else:
-                st.write('analizando video_else')
 
                 df_spline = self.video_processor.yolo_detection_videos(
                     model_selected=modelo_selected,
                     path_video=video_name,
                     model_classes=model_classes
                 )
-                st.write('analizando video1')
 
-            st.write('analizando video2')
             # Create video with trajectory
             video_name_avi = video_name.replace('.mp4', '.avi')
             success = self.video_processor.write_video_with_trajectory(
