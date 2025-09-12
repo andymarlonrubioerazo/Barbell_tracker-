@@ -140,6 +140,7 @@ class VideoProcessor:
         model = YOLO(model=model_selected, task="detect")
                 # Verificar si todas las clases existen
         st.write('ingresa modelo')
+        st.write(model_selected, path_video, model_classes)
         results = model.predict(
             source=path_video,
             show=False,
