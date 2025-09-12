@@ -264,6 +264,18 @@ class WeightliftingApp:
             with open(video_name, "wb") as out:
                 out.write(g.read())
             
+
+            cap=cv2.VideoCapture(video_name)
+            fps=cap.get(cv2.CAP_PROP_FPS)
+            frames=cap.get(cv2.CAP_PROP_FRAME_COUNT)
+            cap.release()
+
+            
+            if frames/fps>60.:
+                st.warning(f'No process {video.name}. The video is too long.\n Upload a video shorter than 60 seconds.')
+                os.remove(video_name)
+                continue
+
             # Process video
             if os.path.exists(excel_video):
                 df_spline = pd.read_excel(excel_video)
@@ -318,8 +330,8 @@ class WeightliftingApp:
 
         
         # Create containers for display
-        video_windows = st.container(horizontal=True)
-        download_video_buttons = st.container(horizontal=True)
+        video_windows = st.container(horizontal=True,key='video_process')
+        download_video_buttons = st.container(horizontal=True, key='download_video_buttons')
         download_excel_buttons = st.container(horizontal=True)
         
         # Display videos
@@ -344,7 +356,7 @@ class WeightliftingApp:
             for  excel in excel_names:
                 with open(excel, "rb") as file:
                     download_excel_buttons.download_button(
-                        label=f"Download Coordinates {os.path.basename(excel)}",
+                        label=f"Download Trajectory (Excel) {os.path.basename(excel)}",
                         data=file,
                         file_name='trajectory_' + os.path.basename(excel),
                         mime="application/vnd.ms-excel",
@@ -408,11 +420,12 @@ class WeightliftingApp:
                 value=3.0
             )
         
+
+            
         # Validate number of videos
         if len(uploaded_videos) > self.number_maximum_videos :
             st.warning(f'!!! ONLY {self.number_maximum_videos} VIDEOS ALLOWED', icon="🚨")
             st.stop()
-        
         # Display uploaded videos
         if uploaded_videos:
             container1 = st.container(horizontal=True)
@@ -441,3 +454,4 @@ class WeightliftingApp:
 if __name__ == "__main__":
     app = WeightliftingApp()
     app.run()
+
