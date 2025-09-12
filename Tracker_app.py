@@ -271,7 +271,7 @@ class WeightliftingApp:
             frames=cap.get(cv2.CAP_PROP_FRAME_COUNT)
             cap.release()
 
-            st.wrte('procesando2', frames/fps>)
+            st.wrte('procesando2', frames/fps)
             
             if frames/fps>60.:
                 st.warning(f'No process {video.name}. The video is too long.\n Upload a video shorter than 60 seconds.')
