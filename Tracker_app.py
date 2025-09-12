@@ -15,7 +15,7 @@ from typing import Dict, List, Optional
 
 class VideoProcessor:
     """Class to handle video processing operations"""
-    
+
     def __init__(self, output_dir: str = 'output'):
         self.output_dir = output_dir
         os.makedirs(self.output_dir, exist_ok=True)
@@ -79,13 +79,6 @@ class VideoProcessor:
         height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT) * ratio_reduce)
         total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
         ni_frames = int(fps * delay)
-        
-        seconds = total_frames / fps
-        
-        if seconds > 60.0:
-            st.warning('The video duration exceeds the 60-second limit. Please upload a shorter video.', icon='🚨')
-            cap.release()
-            return False
         
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
         
@@ -253,9 +246,8 @@ class WeightliftingApp:
     def process_videos(self, uploaded_videos: List, modelo_selected: str, delay: float, model_classes: Dict):
         """Process uploaded videos with YOLO model"""
             
-        
+
         for video in uploaded_videos:
-            st.wrte('procesando0')
             video_name = os.path.join(self.video_processor.output_dir, video.name)
             excel_video = video_name.replace('.mp4', '.xlsx')
             
@@ -264,22 +256,20 @@ class WeightliftingApp:
             with open(video_name, "wb") as out:
                 out.write(g.read())
             
-            st.wrte('procesando1', video_name)
             
             cap=cv2.VideoCapture(video_name)
             fps=cap.get(cv2.CAP_PROP_FPS)
             frames=cap.get(cv2.CAP_PROP_FRAME_COUNT)
             cap.release()
 
-            st.wrte('procesando2', frames/fps)
+            seconds=frames/fps
             
-            if frames/fps>60.:
+            if seconds>60. :
                 st.warning(f'No process {video.name}. The video is too long.\n Upload a video shorter than 60 seconds.')
                 os.remove(video_name)
                 continue
 
             # Process video
-            st.wrte('procesando3')
             if os.path.exists(excel_video):
                 df_spline = pd.read_excel(excel_video)
                 
@@ -293,7 +283,7 @@ class WeightliftingApp:
                         path_video=video_name,
                         model_classes=model_classes
                     )
-                
+               
             else:
                 df_spline = self.video_processor.yolo_detection_videos(
                     model_selected=modelo_selected,
@@ -309,7 +299,7 @@ class WeightliftingApp:
                 out_filename=video_name_avi,
                 delay=delay
             )
-            st.write(success)
+
             if success:
                 # Save results and convert video format
                 df_spline.to_excel(excel_video, index=False)
@@ -337,15 +327,14 @@ class WeightliftingApp:
         download_video_buttons = st.container(horizontal=True, key='download_video_buttons')
         download_excel_buttons = st.container(horizontal=True,key='download_excel_buttons')
 
-        st.write(os.listdir(self.video_processor.output_dir) )
         # Display videos
         
         with video_windows:
             for video in video_names:
-                try:
+                # try:
                     video_windows.video(video, autoplay=True, loop=True, muted=True, width=400)
-                except:
-                    pass
+                # except:
+                #     pass
         # Download buttons for videos
         with download_video_buttons:
             for video in video_names:
