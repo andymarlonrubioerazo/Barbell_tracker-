@@ -141,6 +141,11 @@ class VideoProcessor:
                 # Verificar si todas las clases existen
         st.write('ingresa modelo')
         st.write(model_selected, path_video, model_classes)
+        st.write(os.path.exists(model_selected))
+        st.write(os.path.exists(path_video))
+
+
+
         results = model.predict(
             source=path_video,
             show=False,
