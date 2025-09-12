@@ -330,9 +330,9 @@ class WeightliftingApp:
 
         
         # Create containers for display
-        video_windows = st.container(horizontal=True,key='video_process')
+        video_windows = st.container(horizontal=True,key='video_windows')
         download_video_buttons = st.container(horizontal=True, key='download_video_buttons')
-        download_excel_buttons = st.container(horizontal=True)
+        download_excel_buttons = st.container(horizontal=True,key='download_excel_buttons')
         
         # Display videos
         with video_windows:
