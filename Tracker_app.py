@@ -157,7 +157,7 @@ class VideoProcessor:
             half=True,
             conf=0.4,
 ####onnxx
-              nms=True,
+            #   nms=True,
 
         )
         st.write('resultados con predict')
