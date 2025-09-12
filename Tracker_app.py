@@ -278,7 +278,7 @@ class WeightliftingApp:
                 continue
 
             # Process video
-             st.wrte('procesando')
+            st.wrte('procesando')
             if os.path.exists(excel_video):
                 df_spline = pd.read_excel(excel_video)
                 
