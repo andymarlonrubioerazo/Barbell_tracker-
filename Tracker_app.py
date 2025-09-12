@@ -248,7 +248,30 @@ class WeightliftingApp:
                 
                 #unsafe_allow_html=True,
             )
-    
+        st.markdown("""
+
+            📋 Important Instructions:
+            📹 Video Limit:
+            You can upload a maximum of 3 videos at once.
+
+            ⏱️ Video Duration:
+            Each video MUST NOT exceed 60 seconds (1 minute).
+            Longer videos will be automatically rejected.
+                    
+            ⏳ Processing Time:
+            Analysis may take up to 2 minutes per video.
+            Please wait patiently during processing.
+                    
+            ⚠️ Error Prevention:
+            DO NOT interact with the application during processing.
+            Any interaction may cause analysis errors.
+            Keep the browser tab active and visible.
+                    
+            🎯 Recommended Format:
+            Accepted formats: MP4, AVI, MOV
+            Ensure videos clearly show the barbell and discs
+            """)
+        
     def process_videos(self, uploaded_videos: List, modelo_selected: str, delay: float, model_classes: Dict):
         """Process uploaded videos with YOLO model"""
             
@@ -337,10 +360,8 @@ class WeightliftingApp:
         
         with video_windows:
             for video in video_names:
-                # try:
-                    video_windows.video(video, autoplay=True, loop=True, muted=True, width=400)
-                # except:
-                #     pass
+                video_windows.video(video, autoplay=True, loop=True, muted=True, width=400)
+               
         # Download buttons for videos
         with download_video_buttons:
             for video in video_names:
