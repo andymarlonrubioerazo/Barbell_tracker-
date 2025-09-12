@@ -239,18 +239,20 @@ class WeightliftingApp:
     
     def setup_sidebar(self):
         """Setup the application sidebar"""
+        title_container=st.container(horizontal=True)
+
         img_base64 = self.img_to_base64(self.img_path)
         if img_base64:
            #st.sidebar.markdown(
-            st.image(
+            title_container.image(
                 self.img_path, width=400
                 #f'<img src="data:image/png;base64,{img_base64}" class="cover-glow">',
                 
                 #unsafe_allow_html=True,
             )
-        st.markdown("""
+        title_container.markdown("""
 
-            📋 Important Instructions:
+            📋 **Important INSTRUCTIONS**:
             📹 Video Limit:
             You can upload a maximum of 3 videos at once.
 
