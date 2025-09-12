@@ -339,10 +339,13 @@ class WeightliftingApp:
 
         st.write(os.listdir(self.video_processor.output_dir) )
         # Display videos
+        
         with video_windows:
             for video in video_names:
+                try:
                     video_windows.video(video, autoplay=True, loop=True, muted=True, width=400)
-        
+                except:
+                    pass
         # Download buttons for videos
         with download_video_buttons:
             for video in video_names:
@@ -437,11 +440,7 @@ class WeightliftingApp:
                 for video in uploaded_videos:
                     container1.video(video, width=400, autoplay=True, loop=True, muted=True)
         
-        # Process button\
-        st.write(self.modelos)
-        for m2 in os.listdir('modelos'):
-            st.write(m2)
-        st.write( delay, self.model_selected)
+       
         if st.button('Process video with YOLO'):
             if not uploaded_videos:
                 st.warning("Please upload at least one video first")
