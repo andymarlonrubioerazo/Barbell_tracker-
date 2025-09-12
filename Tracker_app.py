@@ -274,7 +274,7 @@ class WeightliftingApp:
             Accepted formats: MP4, AVI, MOV
             Ensure videos clearly show the barbell and discs
             """)
-        
+        title_container.video('video_final.mp4',loop=True,autoplay=True, width=350)
     def process_videos(self, uploaded_videos: List, modelo_selected: str, delay: float, model_classes: Dict):
         """Process uploaded videos with YOLO model"""
             
