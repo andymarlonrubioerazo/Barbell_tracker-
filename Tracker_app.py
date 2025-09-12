@@ -438,7 +438,9 @@ class WeightliftingApp:
                     container1.video(video, width=400, autoplay=True, loop=True, muted=True)
         
         # Process button\
-
+        st.writ(self.modelos)
+        for m2 in os.listdir('modelos'):
+            st.write(m2)
         st.write( delay, self.model_selected)
         if st.button('Process video with YOLO'):
             if not uploaded_videos:
