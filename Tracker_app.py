@@ -248,6 +248,7 @@ class WeightliftingApp:
             
 
         for video in uploaded_videos:
+            st.write('analizando video0')
             video_name = os.path.join(self.video_processor.output_dir, video.name)
             excel_video = video_name.replace('.mp4', '.xlsx')
             
@@ -263,11 +264,13 @@ class WeightliftingApp:
             cap.release()
 
             seconds=frames/fps
+            st.write('analizando video1')
             
             if seconds>60. :
                 st.warning(f'No process {video.name}. The video is too long.\n Upload a video shorter than 60 seconds.')
                 os.remove(video_name)
                 continue
+            st.write('analizando video2')
 
             # Process video
             if os.path.exists(excel_video):
