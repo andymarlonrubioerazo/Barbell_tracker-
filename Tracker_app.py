@@ -334,7 +334,7 @@ class WeightliftingApp:
         download_video_buttons = st.container(horizontal=True, key='download_video_buttons')
         download_excel_buttons = st.container(horizontal=True,key='download_excel_buttons')
 
-        st.write(video_names)
+        st.write(os.listdir(self.video_processor.output_dir) )
         # Display videos
         with video_windows:
             for video in video_names:
