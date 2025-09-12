@@ -255,7 +255,7 @@ class WeightliftingApp:
             
         
         for video in uploaded_videos:
-            
+            st.wrte('procesando0')
             video_name = os.path.join(self.video_processor.output_dir, video.name)
             excel_video = video_name.replace('.mp4', '.xlsx')
             
@@ -264,12 +264,14 @@ class WeightliftingApp:
             with open(video_name, "wb") as out:
                 out.write(g.read())
             
-
+            st.wrte('procesando1', video_name)
+            
             cap=cv2.VideoCapture(video_name)
             fps=cap.get(cv2.CAP_PROP_FPS)
             frames=cap.get(cv2.CAP_PROP_FRAME_COUNT)
             cap.release()
 
+            st.wrte('procesando2', frames/fps>)
             
             if frames/fps>60.:
                 st.warning(f'No process {video.name}. The video is too long.\n Upload a video shorter than 60 seconds.')
@@ -277,7 +279,7 @@ class WeightliftingApp:
                 continue
 
             # Process video
-            st.wrte('procesando')
+            st.wrte('procesando3')
             if os.path.exists(excel_video):
                 df_spline = pd.read_excel(excel_video)
                 
