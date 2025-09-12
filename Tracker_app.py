@@ -243,9 +243,11 @@ class WeightliftingApp:
         img_base64 = self.img_to_base64(self.img_path)
         if img_base64:
            #st.sidebar.markdown(
-            st.markdown(
-                f'<img src="data:image/png;base64,{img_base64}" class="cover-glow">',
-                unsafe_allow_html=True,
+            st.image(
+                img_base64, width=400
+                #f'<img src="data:image/png;base64,{img_base64}" class="cover-glow">',
+                
+                #unsafe_allow_html=True,
             )
     
     def process_videos(self, uploaded_videos: List, modelo_selected: str, delay: float, model_classes: Dict):
