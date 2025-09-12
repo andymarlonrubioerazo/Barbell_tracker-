@@ -290,7 +290,7 @@ class WeightliftingApp:
                     path_video=video_name,
                     model_classes=model_classes
                 )
-            
+            st.write('analizando video')
             # Create video with trajectory
             video_name_avi = video_name.replace('.mp4', '.avi')
             success = self.video_processor.write_video_with_trajectory(
@@ -331,10 +331,10 @@ class WeightliftingApp:
         
         with video_windows:
             for video in video_names:
-                try:
+                # try:
                     video_windows.video(video, autoplay=True, loop=True, muted=True, width=400)
-                except:
-                    pass
+                # except:
+                #     pass
         # Download buttons for videos
         with download_video_buttons:
             for video in video_names:
