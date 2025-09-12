@@ -248,7 +248,6 @@ class WeightliftingApp:
             
 
         for video in uploaded_videos:
-            st.write('analizando video0')
             video_name = os.path.join(self.video_processor.output_dir, video.name)
             excel_video = video_name.replace('.mp4', '.xlsx')
             
@@ -264,13 +263,11 @@ class WeightliftingApp:
             cap.release()
 
             seconds=frames/fps
-            st.write('analizando video1')
             
             if seconds>60. :
                 st.warning(f'No process {video.name}. The video is too long.\n Upload a video shorter than 60 seconds.')
                 os.remove(video_name)
                 continue
-            st.write('analizando video2')
 
             # Process video
             if os.path.exists(excel_video):
@@ -286,14 +283,17 @@ class WeightliftingApp:
                         path_video=video_name,
                         model_classes=model_classes
                     )
-               
+                st.write('analizando video0')
+
             else:
                 df_spline = self.video_processor.yolo_detection_videos(
                     model_selected=modelo_selected,
                     path_video=video_name,
                     model_classes=model_classes
                 )
-            st.write('analizando video')
+                st.write('analizando video1')
+
+            st.write('analizando video2')
             # Create video with trajectory
             video_name_avi = video_name.replace('.mp4', '.avi')
             success = self.video_processor.write_video_with_trajectory(
