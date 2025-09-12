@@ -331,10 +331,10 @@ class WeightliftingApp:
         
         with video_windows:
             for video in video_names:
-                # try:
+                try:
                     video_windows.video(video, autoplay=True, loop=True, muted=True, width=400)
-                # except:
-                #     pass
+                except:
+                    pass
         # Download buttons for videos
         with download_video_buttons:
             for video in video_names:
