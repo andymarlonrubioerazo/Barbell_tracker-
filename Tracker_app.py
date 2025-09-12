@@ -142,7 +142,7 @@ class VideoProcessor:
 
         try:
 
-
+            st.write(os.path.exists(path_video))
 
             results = model(
                 source=path_video,
