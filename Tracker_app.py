@@ -306,7 +306,7 @@ class WeightliftingApp:
                 out_filename=video_name_avi,
                 delay=delay
             )
-            
+            st.write(success)
             if success:
                 # Save results and convert video format
                 df_spline.to_excel(excel_video, index=False)
