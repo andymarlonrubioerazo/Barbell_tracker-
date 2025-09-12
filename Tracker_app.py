@@ -146,15 +146,19 @@ class VideoProcessor:
         """Perform YOLO object detection on video"""
         model = YOLO(model=model_selected, task="detect")
         
-        results = model(
+        results = model.predict(
             source=path_video,
             show=False,
             device=self.device,
             verbose=False,
-            stream=True,
+            stream=False,
             iou=0.25,
             max_det=2,
             half=True,
+            conf=0.4,
+####onnxx
+              nms=True,
+
         )
         
         df = pd.DataFrame([])
@@ -170,9 +174,9 @@ class VideoProcessor:
                 df = pd.concat([df, dfi], ignore_index=True)
         
         df['class'] = df['class'].replace(model_classes)
-        n_max = i+1
+        n_max = i
         
-        df_spline = pd.DataFrame([])
+        df_spline = None
         for i, clase in enumerate(df['class'].unique()):
             dfi = self.trajectory_interpolate_every_class(df, clase=clase, n_max=n_max)
             
@@ -188,7 +192,7 @@ class WeightliftingApp:
     """Main application class for weightlifting analysis"""
     
     def __init__(self):
-        self.img_path = "Gemini_Generated_Image_o0i5a5o0i5a5o0i5.png"
+        self.img_path = "pages/Gemini_Generated_Image_o0i5a5o0i5a5o0i5.png"
         self.number_maximum_videos = 3
         self.video_processor = VideoProcessor()
         path_modelos = os.path.join('modelos')
@@ -207,19 +211,22 @@ class WeightliftingApp:
         
         # Load models
         self.modelos ={
+
             'barbell_extremity': {
-                'path': os.path.join(path_modelos, 'n_extremity_better_color.pt'),
+                'path': os.path.join(path_modelos, 'n_extremity_better_color.onnx'),
                 'classes': {0: 'barbell_extremity'}
                         },
             'barbell_disk': {
-                'path': os.path.join(path_modelos, 'n_disk_better_color.pt'),
+                'path': os.path.join(path_modelos, 'n_disk_better_color.onnx'),
                 'classes': {0: 'barbell_disk'}
                             },
             'barbell_extremity_and_disk': {
-                'path': os.path.join(path_modelos, 'n_disk_extremity_better_color.pt'),
+                'path': os.path.join(path_modelos, 'n_disk_extremity_better_color.onnx'),
                 'classes': {0: 'barbell_extremity', 1: 'barbell_disk'}
-                    }
+                    },
+            
             }
+        
         
     @staticmethod
     def img_to_base64(image_path: str) -> Optional[str]:
@@ -242,12 +249,7 @@ class WeightliftingApp:
     
     def process_videos(self, uploaded_videos: List, modelo_selected: str, delay: float, model_classes: Dict):
         """Process uploaded videos with YOLO model"""
-      #  if not torch.cuda.is_available():
-       #     st.warning('No GPU is available, the video processing will be very slow')
-        #    return
-        st.write(os.cpu_count())
-        st.write(f"Using device: {self.video_processor.device}")
-        
+            
         
         for video in uploaded_videos:
             
@@ -302,10 +304,15 @@ class WeightliftingApp:
         """Display processed videos and download buttons"""
         video_names = [os.path.join(self.video_processor.output_dir, video) 
                       for video in os.listdir(self.video_processor.output_dir) 
-                      if video.endswith('.mp4')]
-        excel_names = [os.path.join(self.video_processor.output_dir, video) 
-                      for video in os.listdir(self.video_processor.output_dir) 
-                      if video.endswith('.xlsx')]
+                      if video.endswith('.mp4') and video in self.uploaded_videos]
+        
+      
+        
+        excel_names = [os.path.join(self.video_processor.output_dir, excel) 
+                      for excel in os.listdir(self.video_processor.output_dir) 
+                      if excel.endswith('.xlsx') and 
+                      os.path.join(self.video_processor.output_dir, excel).replace('.xlsx','.mp4')  in video_names ] 
+
         
         # Create containers for display
         video_windows = st.container(horizontal=True)
@@ -354,7 +361,7 @@ class WeightliftingApp:
                 options=self.modelos.keys(),
                 index=0
             )
-             
+            self.model_selected=self.modelos[self.mi]
         
         with col1:
             try:
@@ -368,6 +375,7 @@ class WeightliftingApp:
                 # Remove duplicates by name
 
                 uploaded_videos = {k.name: k for k in uploaded_videos}
+                self.uploaded_videos=list(uploaded_videos.keys())
 
                 if uploaded_videos:
                     
@@ -398,7 +406,7 @@ class WeightliftingApp:
             )
         
         # Validate number of videos
-        if len(uploaded_videos) > self.number_maximum_videos:
+        if len(uploaded_videos) > self.number_maximum_videos :
             st.warning(f'!!! ONLY {self.number_maximum_videos} VIDEOS ALLOWED', icon="🚨")
             st.stop()
         
@@ -414,12 +422,14 @@ class WeightliftingApp:
             if not uploaded_videos:
                 st.warning("Please upload at least one video first")
                 return
-            with st.spinner("Wait for it. The analysis could take minutes.", show_time=True):
-                self.process_videos(uploaded_videos=uploaded_videos, 
-                                    modelo_selected=self.modelos[self.mi]['path'], 
-                                    delay=delay, 
-                                    model_classes=self.modelos[self.mi]['classes'])
-        
+            try:
+                with st.spinner("Wait for it. The analysis could take minutes.", show_time=True):
+                    self.process_videos(uploaded_videos=uploaded_videos, 
+                                        modelo_selected=self.model_selected['path'], 
+                                        delay=delay, 
+                                        model_classes=self.model_selected['classes'])
+            except:
+                st.write('No change parameters please')        
         # Display results
         self.display_results()
 
