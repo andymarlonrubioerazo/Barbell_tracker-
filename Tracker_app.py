@@ -244,7 +244,7 @@ class WeightliftingApp:
         if img_base64:
            #st.sidebar.markdown(
             st.image(
-                img_base64, width=400
+                self.img_path, width=400
                 #f'<img src="data:image/png;base64,{img_base64}" class="cover-glow">',
                 
                 #unsafe_allow_html=True,
