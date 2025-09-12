@@ -12,3 +12,12 @@ openpyxl==3.1.5
 
 ## Nvidia driver
 nvidia-ml-py==12.575.51
+onnxruntime==1.22.1
+
+
+# onnx                              1.17.0
+# onnx_graphsurgeon                 0.5.8
+# onnx2tf                           1.28.2
+# onnxruntime                       
+# onnxruntime-gpu                   1.21.1
+# onnxslim  
