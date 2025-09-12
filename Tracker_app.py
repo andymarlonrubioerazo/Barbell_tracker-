@@ -444,8 +444,8 @@ class WeightliftingApp:
                                         modelo_selected=self.model_selected['path'], 
                                         delay=delay, 
                                         model_classes=self.model_selected['classes'])
-            except:
-                st.write('No change parameters please')        
+            except as error:
+                st.warning('No change parameters please', error)        
         # Display results
         self.display_results()
 
