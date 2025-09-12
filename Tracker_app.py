@@ -138,7 +138,8 @@ class VideoProcessor:
     def yolo_detection_videos(self, model_selected: str, path_video: str, model_classes: Dict) -> DataFrame:
         """Perform YOLO object detection on video"""
         model = YOLO(model=model_selected, task="detect")
-        
+                # Verificar si todas las clases existen
+        st.write('ingresa modelo')
         results = model.predict(
             source=path_video,
             show=False,
@@ -153,6 +154,7 @@ class VideoProcessor:
               nms=True,
 
         )
+        st.write('resultados con predict')
         
         df = pd.DataFrame([])
         
@@ -177,7 +179,7 @@ class VideoProcessor:
                 df_spline = dfi.copy()
             else:
                 df_spline = pd.concat([df_spline, dfi], ignore_index=True)
-        
+        st.write('final del analisis')
         return df_spline
 
 
@@ -272,8 +274,7 @@ class WeightliftingApp:
             # Process video
             if os.path.exists(excel_video):
                 df_spline = pd.read_excel(excel_video)
-                st.write('analizando video_previa')
-                # Verificar si todas las clases existen
+
                 clases_faltantes = [clase for clase in df_spline['class'].unique() 
                                 if clase not in self.modelos[self.mi]['classes'].values()]
                 
@@ -283,7 +284,6 @@ class WeightliftingApp:
                         path_video=video_name,
                         model_classes=model_classes
                     )
-                st.write('analizando video0')
 
             else:
                 st.write('analizando video_else')
