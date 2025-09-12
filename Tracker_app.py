@@ -157,9 +157,11 @@ class VideoProcessor:
     #             nms=True,
 
             )
-        except:
+        except Exception as e:
+            st.error(f"Error al ejecutar el modelo: {str(e)}")
+            st.write(f"Tipo de error: {type(e).__name__}")
+
             st.write('error dentro de resultados')
-            st.stop()
         st.write('resultados con predict')
         
         df = pd.DataFrame([])
