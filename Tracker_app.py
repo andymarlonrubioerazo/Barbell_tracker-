@@ -183,7 +183,7 @@ class VideoProcessor:
                 df_spline = dfi.copy()
             else:
                 df_spline = pd.concat([df_spline, dfi], ignore_index=True)
-        st.write('final del analisis')
+        
         return df_spline
 
 
