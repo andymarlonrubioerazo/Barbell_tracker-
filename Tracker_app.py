@@ -252,7 +252,7 @@ class WeightliftingApp:
             )
         title_container.markdown("""
 
-            📋 **red[Important INSTRUCTIONS]**:
+            📋 **:red[Important INSTRUCTIONS]**:
                                  
             📹 Video Limit:
             You can upload a maximum of 3 videos at once.
