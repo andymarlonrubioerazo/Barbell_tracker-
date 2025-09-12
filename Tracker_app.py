@@ -274,7 +274,6 @@ class WeightliftingApp:
             if frames/fps>60.:
                 st.warning(f'No process {video.name}. The video is too long.\n Upload a video shorter than 60 seconds.')
                 os.remove(video_name)
-                st.write('boorando video')
                 continue
 
             # Process video
