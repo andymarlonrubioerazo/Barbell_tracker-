@@ -442,14 +442,14 @@ class WeightliftingApp:
             if not uploaded_videos:
                 st.warning("Please upload at least one video first")
                 return
-            try:
-                with st.spinner("Wait for it. The analysis could take minutes.", show_time=True):
+            #try:
+            with st.spinner("Wait for it. The analysis could take minutes.", show_time=True):
                     self.process_videos(uploaded_videos=uploaded_videos, 
                                         modelo_selected=self.model_selected['path'], 
                                         delay=delay, 
                                         model_classes=self.model_selected['classes'])
-            except :
-                st.warning('No change parameters please')        
+            #except :
+             #   st.warning('No change parameters please')        
         # Display results
         self.display_results()
 
