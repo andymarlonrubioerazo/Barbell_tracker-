@@ -139,25 +139,28 @@ class VideoProcessor:
         """Perform YOLO object detection on video"""
         model = YOLO(model=model_selected, task="detect")
                 # Verificar si todas las clases existen
-        st.write('ingresa modelo')
+
+        try:
 
 
 
+            results = model.predict(
+                source=path_video,
+                show=False,
+                device=self.device,
+                verbose=False,
+                stream=False,
+                iou=0.25,
+                max_det=2,
+                half=True,
+                conf=0.4,
+    ####onnxx
+                nms=True,
 
-        results = model.predict(
-            source=path_video,
-            show=False,
-            device=self.device,
-            verbose=False,
-            stream=False,
-            # iou=0.25,
-            max_det=2,
-            half=True,
-            conf=0.4,
-####onnxx
-              nms=True,
-
-        )
+            )
+        except:
+            st.write('error dentro de resultados')
+            st.stop()
         st.write('resultados con predict')
         
         df = pd.DataFrame([])
