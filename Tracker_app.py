@@ -144,7 +144,7 @@ class VideoProcessor:
 
 
 
-            results = model.predict(
+            results = model(
                 source=path_video,
     #             show=False,
     #             device=self.device,
