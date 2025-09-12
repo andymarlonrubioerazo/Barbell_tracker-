@@ -242,7 +242,8 @@ class WeightliftingApp:
         """Setup the application sidebar"""
         img_base64 = self.img_to_base64(self.img_path)
         if img_base64:
-            st.sidebar.markdown(
+           #st.sidebar.markdown(
+            st.markdown(
                 f'<img src="data:image/png;base64,{img_base64}" class="cover-glow">',
                 unsafe_allow_html=True,
             )
