@@ -146,7 +146,7 @@ class VideoProcessor:
                 show=False,
                 device=self.device,
                 verbose=False,
-                stream=False,
+                stream=True,
                 iou=0.25,
                 max_det=2,
                 half=True,
