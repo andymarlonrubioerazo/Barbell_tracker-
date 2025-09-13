@@ -139,7 +139,7 @@ class VideoProcessor:
         """Perform YOLO object detection on video"""
         model = YOLO(model=model_selected, task="detect")
                 # Verificar si todas las clases existen
-
+        print(self.device)
         try:
             results = model(
                 source=path_video,
