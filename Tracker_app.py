@@ -402,6 +402,7 @@ class WeightliftingApp:
                 options=self.modelos.keys(),
                 index=0
             )
+            self.model_selected=self.modelos[self.mi]
            
         with col1:
             try:
@@ -469,7 +470,8 @@ class WeightliftingApp:
                                         modelo_selected=self.model_selected['path'], 
                                         delay=delay, 
                                         model_classes=self.model_selected['classes'])
-            except :
+            except Exception as e:
+                st.write(e)
                 st.warning('No change parameters please')        
         # Display results
         self.display_results()
