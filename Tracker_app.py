@@ -306,8 +306,8 @@ class WeightliftingApp:
                 df_spline = pd.read_excel(excel_video)
 
                 
-                clases_faltantes = [clase for clase in df_spline['class'].unique()   
-                                if clase not in model_classes.values() ]
+                clases_faltantes = [clase for clase in model_classes.values() 
+                                if clase not in  df_spline['class'].unique()   ]
                 
                 if len(clases_faltantes)>0:
                     df_spline = self.video_processor.yolo_detection_videos(
