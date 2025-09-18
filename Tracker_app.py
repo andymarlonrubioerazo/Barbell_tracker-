@@ -151,6 +151,7 @@ class VideoProcessor:
                 max_det=2,
                 half=True,
                 conf=0.4,
+                classes=model_classes.keys(),
     ####onnxx
                 nms=True,
 
