@@ -402,8 +402,7 @@ class WeightliftingApp:
                 options=self.modelos.keys(),
                 index=0
             )
-            self.model_selected=self.modelos[self.mi]
-        
+           
         with col1:
             try:
                 uploaded_videos = st.file_uploader(

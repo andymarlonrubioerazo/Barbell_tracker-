@@ -1,5 +1,4 @@
 [theme]
 base = "dark"
 
-[server]
-pythonVersion = "3.12"
+
