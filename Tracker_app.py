@@ -325,6 +325,7 @@ class WeightliftingApp:
                 )
 
             # Create video with trajectory
+            df_spline=df_spline.loc[df_spline['class'].isin(model_classes.values())].reset_index(drop=True)
             video_name_avi = video_name.replace('.mp4', '.avi')
             success = self.video_processor.write_video_with_trajectory(
                 path_video=video_name,
