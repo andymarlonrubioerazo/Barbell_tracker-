@@ -151,7 +151,6 @@ class VideoProcessor:
                 max_det=2,
                 half=True,
                 conf=0.4,
-                classes=model_classes.keys(),
     ####onnxx
                 nms=True,
 
@@ -177,7 +176,7 @@ class VideoProcessor:
         n_max = i
         
         df_spline = None
-        for i, clase in enumerate(df['class'].unique()):
+        for i, clase in enumerate(model_classes.values()):
             dfi = self.trajectory_interpolate_every_class(df, clase=clase, n_max=n_max)
             
             if i == 0:
